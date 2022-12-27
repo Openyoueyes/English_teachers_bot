@@ -5,7 +5,7 @@ env.read_env()
 API_TOKEN = env.str("API_TOKEN")
 DB_HOST = env.str("POSTGRES_HOST")
 ADMINS = env.list("ADMIN_ID")
-
+ID_GROUP = env.str("ID_GROUP")
 APP_NAME = env.str("APP_NAME")
 
 if APP_NAME:
