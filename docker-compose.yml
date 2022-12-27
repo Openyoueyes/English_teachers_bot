@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  bot:
+    build: .
+    depends_on:
+      - db
+      - nginx
+    links:
+      - nginx
+  db:
+    container_name: db_d_1
+    image: postgres:11
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    env_file:
+      - .env
+  nginx:
+    container_name: nginx-bot
+    image: nginx:1.18.0
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./bot_nginx_conf/your_domain:/etc/nginx/conf.d/default.conf
+      - /etc/letsencrypt/:/etc/letsencrypt:ro  
+volumes:
+  pgdata:

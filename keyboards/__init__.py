@@ -1,0 +1,1 @@
+from keyboards.client_kb import kb_client_registration, kb_client_pay, kb_client_payments
