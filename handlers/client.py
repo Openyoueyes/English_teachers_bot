@@ -1,7 +1,7 @@
 from aiogram import types, Dispatcher
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Text
-from data.config import ADMINS
+from data.config import ADMINS,ID_GROUP
 from handlers.admin import start_menu
 from keyboards.client_kb import kb_client_registration, kb_client_pay, kb_client_payments, kb_client_cancel
 from database import postgres_db
@@ -127,7 +127,7 @@ async def load_photo(message: types.Message, state: FSMContext):
             postgres_db.sql_mark_payment_id(str(st_id), pay_id)
             all_payments_info = postgres_db.sql_all_payments_student_info(st_id)
     await message.reply('Thanks for your payment 😊 Have a nice day ☀️', reply_markup=kb_client_pay)
-    await bot.send_message(-561359441, f"Student {full_name} made a payment in the amount {amount}")
+    await bot.send_message(int(ID_GROUP), f"Student {full_name} made a payment in the amount {amount}")
     await state.finish()
     await FSMclient.waiting_start_menu_commands.set()
 
